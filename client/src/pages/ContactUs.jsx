@@ -28,23 +28,17 @@ const ContactUs = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios
-        .post(`${import.meta.env.VITE_SERVER_URL}/api/contacts`, data)
-        .then((response) => {
-          toast.success('Message sent successfully!');
-          console.log(response);
-          axios
-            .post(
-              `${import.meta.env.VITE_SERVER_URL}/api/createandsendpdf`,
-              data
-            )
-            .then((response) => {
-              toast.success('Pdf created and sent successfull');
-              console.log(response);
-            });
-        });
+      // Use the API function to send the contact message
+      const response = await createContact(data);
+      toast.success('Message sent successfully!');
+      console.log(response);
 
-      reset();
+      // Use the API function to create and send the PDF
+      const pdfResponse = await createAndSendPdf(data);
+      toast.success('PDF created and sent successfully!');
+      console.log(pdfResponse);
+
+      reset(); // Assuming reset is defined to clear the form
     } catch (error) {
       toast.error('Failed to send message');
     }
