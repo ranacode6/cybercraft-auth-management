@@ -15,18 +15,12 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const login = (userData) =>
-  api.post('/api/auth/login', userData, {
-    withCredentials: true,
-    credentials: 'include'
-  });
+export const login = (userData) => api.post('/api/auth/login', userData);
 export const registration = (userData) =>
   api.post('/api/auth/register', userData);
-export const getContacts = () =>
-  api.get('/api/contacts', { withCredentials: true, credentials: 'include' });
-// export const getTasks = () => api.get('/tasks');
-// export const createTask = (taskData) => api.post('/tasks', taskData);
-// export const updateTask = (id, taskData) => api.put(`/tasks/${id}`, taskData);
-// export const deleteTask = (id) => api.delete(`/tasks/${id}`);
+export const createContact = (submittedData) =>
+  api.post('/api/contacts', submittedData);
+export const getContacts = () => api.get('/api/contacts');
+export const createAndSendPdf = () => api.post('/api/createandsendpdf');
 
 export default api;

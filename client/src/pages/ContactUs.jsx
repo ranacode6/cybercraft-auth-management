@@ -16,6 +16,7 @@ import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import { Input } from '../components/ui/input';
 import { Link } from 'react-router-dom';
+import { createAndSendPdf, createContact } from '../services/api';
 
 const ContactUs = () => {
   const {
@@ -28,17 +29,15 @@ const ContactUs = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Use the API function to send the contact message
       const response = await createContact(data);
       toast.success('Message sent successfully!');
       console.log(response);
 
-      // Use the API function to create and send the PDF
       const pdfResponse = await createAndSendPdf(data);
       toast.success('PDF created and sent successfully!');
       console.log(pdfResponse);
 
-      reset(); // Assuming reset is defined to clear the form
+      reset();
     } catch (error) {
       toast.error('Failed to send message');
     }
