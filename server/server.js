@@ -36,6 +36,7 @@ connectDB();
 api.get('/', (req, res) => {
   res.send('hello world');
 });
+
 app.use('/api/contacts', contactRoute);
 app.use('/api/auth', authRoute);
 app.use('/api', pdfRoute);
