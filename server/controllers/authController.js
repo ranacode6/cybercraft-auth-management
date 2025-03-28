@@ -65,16 +65,15 @@ export const login = async (req, res) => {
     }
 
     const token = generateToken(user._id);
-    // Use secure: true in production
 
     const isProduction = process.env.NODE_ENV;
-    console.log(isProduction);
     return res
       .cookie('token', token, {
         httpOnly: true,
-        secure: isProduction ? true : false,
+        secure: isProduction === 'production' ? true : false,
         sameSite: 'Strict', // or 'Lax'
-        expires: new Date(Date.now() + 3600000) // 1 hour
+        expires: new Date(Date.now() + 3600000), // 1 hour
+        path: '/'
       })
       .json({
         token,
