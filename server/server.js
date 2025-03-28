@@ -15,7 +15,7 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet());
 const corsOptions = {
-  origin: ['http://localhost:5173', process.env.CLIENT_URL],
+  origin: process.env.CLIENT_URL,
   credentials: true,
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
