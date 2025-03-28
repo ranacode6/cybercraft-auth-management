@@ -34,7 +34,7 @@ export const RegisterPage = () => {
   const onSubmit = async (data) => {
     try {
       await registration(data);
-      toast.success('Login Successful!');
+      toast.success('Registration Successful!');
       navigate('/login');
       reset();
     } catch (error) {
