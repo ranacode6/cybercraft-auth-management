@@ -33,6 +33,9 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 // Routes
+api.get((req, res) => {
+  res.send('hello world');
+});
 app.use('/api/contacts', contactRoute);
 app.use('/api/auth', authRoute);
 app.use('/api', pdfRoute);
