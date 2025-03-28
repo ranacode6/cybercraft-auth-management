@@ -7,7 +7,10 @@ export const createPdfAndSendEmail = async (req, res) => {
 
   try {
     // Generate PDF
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true, // Ensure headless mode is enabled
+      args: ['--no-sandbox', '--disable-setuid-sandbox'] // Add these arguments if needed
+    });
     const page = await browser.newPage();
     await page.setContent(html);
 
@@ -55,7 +58,7 @@ export const createPdfAndSendEmail = async (req, res) => {
       return res.send('PDF generated and email sent successfully');
     });
   } catch (err) {
-    console.error('Error generating PDF:', err);
+    cconsole.error('Error generating PDF:', err.stack);
     res.status(500).send('Error generating PDF');
   }
 };
