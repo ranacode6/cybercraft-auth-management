@@ -33,10 +33,6 @@ const ContactUs = () => {
       toast.success('Message sent successfully!');
       console.log(response);
 
-      const pdfResponse = await createAndSendPdf(data);
-      toast.success('PDF created and sent successfully!');
-      console.log(pdfResponse);
-
       reset();
     } catch (error) {
       toast.error('Failed to send message');

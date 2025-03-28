@@ -8,7 +8,6 @@ import compression from 'compression';
 import connectDB from './config/db.js';
 import contactRoute from './routes/contactRoutes.js';
 import authRoute from './routes/authRoutes.js';
-import pdfRoute from './routes/pdfRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -35,7 +34,6 @@ connectDB();
 // Routes
 app.use('/api/contacts', contactRoute);
 app.use('/api/auth', authRoute);
-app.use('/api', pdfRoute);
 
 const PORT = process.env.PORT || 8000;
 

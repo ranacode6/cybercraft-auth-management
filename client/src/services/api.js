@@ -18,7 +18,5 @@ export const registration = (userData) =>
 export const createContact = (submittedData) =>
   api.post('/api/contacts', submittedData, credentials);
 export const getContacts = () => api.get('/api/contacts', credentials);
-export const createAndSendPdf = () =>
-  api.post('/api/createandsendpdf', credentials);
 
 export default api;
