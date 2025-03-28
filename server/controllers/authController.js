@@ -71,7 +71,7 @@ export const login = async (req, res) => {
       .cookie('token', token, {
         httpOnly: true,
         secure: isProduction === 'production' ? true : false,
-        sameSite: 'Lax',
+        sameSite: 'none',
         expires: new Date(Date.now() + 3600000) // 1 hour
       })
       .json({
