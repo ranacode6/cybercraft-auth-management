@@ -1,13 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import passport from 'passport';
-import {
-  register,
-  login,
-  getProfile,
-  googleCallback,
-  facebookCallback
-} from '../controllers/authController.js';
+import { register, login, getProfile } from '../controllers/authController.js';
 import { verifyToken } from '../middleware/auth.js';
 
 const authRoute = express.Router();
@@ -29,26 +22,5 @@ const loginValidation = [
 authRoute.post('/register', registerValidation, register);
 authRoute.post('/login', loginValidation, login);
 authRoute.get('/profile', verifyToken, getProfile);
-
-// Social authentication routes
-authRoute.get(
-  '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-authRoute.get(
-  '/google/callback',
-  passport.authenticate('google'),
-  googleCallback
-);
-
-authRoute.get(
-  '/facebook',
-  passport.authenticate('facebook', { scope: ['email'] })
-);
-authRoute.get(
-  '/facebook/callback',
-  passport.authenticate('facebook'),
-  facebookCallback
-);
 
 export default authRoute;

@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+const isProduction = import.meta.env.NODE_ENV === 'production';
+
+const serverUrl = isProduction
+  ? import.meta.env.VITE_SERVER_URL_PROD
+  : import.meta.env.VITE_SERVER_URL_DEV;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_URL
+  baseURL: serverUrl
 });
 
 axios.defaults.withCredentials = true;

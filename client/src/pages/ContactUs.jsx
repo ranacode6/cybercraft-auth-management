@@ -16,7 +16,7 @@ import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import { Input } from '../components/ui/input';
 import { Link } from 'react-router-dom';
-import { createAndSendPdf, createContact } from '../services/api';
+import { createContact } from '../services/api';
 
 const ContactUs = () => {
   const {

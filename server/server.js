@@ -8,13 +8,22 @@ import compression from 'compression';
 import connectDB from './config/db.js';
 import contactRoute from './routes/contactRoutes.js';
 import authRoute from './routes/authRoutes.js';
+import passport from 'passport';
+
+app.use(passport.initialize());
+require('./services/googleStrategy.jsx');
 
 dotenv.config();
 const app = express();
 app.use(cookieParser());
 app.use(helmet());
+
+const isProduction = process.env.NODE_ENV === 'production';
+const CLIENT_URL = isProduction
+  ? process.env.CLIENT_URL_PROD
+  : process.env.CLIENT_URL_DEV;
 const corsOptions = {
-  origin: [process.env.CLIENT_URL],
+  origin: [CLIENT_URL],
   credentials: true,
   methods: ['GET,POST,PUT,DELETE'],
   allowedHeaders: 'Content-Type,Authorization'
@@ -35,7 +44,7 @@ connectDB();
 app.use('/api/contacts', contactRoute);
 app.use('/api/auth', authRoute);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
