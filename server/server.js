@@ -9,7 +9,7 @@ import connectDB from './config/db.js';
 import contactRoute from './routes/contactRoutes.js';
 import authRoute from './routes/authRoutes.js';
 import passport from 'passport';
-import './services/googleStrategy.jsx';
+import './services/googleStrategy.js';
 
 dotenv.config();
 const app = express();
