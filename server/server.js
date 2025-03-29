@@ -9,11 +9,11 @@ import connectDB from './config/db.js';
 import contactRoute from './routes/contactRoutes.js';
 import authRoute from './routes/authRoutes.js';
 import passport from 'passport';
+import './services/googleStrategy.jsx';
 
 dotenv.config();
 const app = express();
 app.use(passport.initialize());
-require('./services/googleStrategy.jsx');
 app.use(cookieParser());
 app.use(helmet());
 
