@@ -10,11 +10,10 @@ import contactRoute from './routes/contactRoutes.js';
 import authRoute from './routes/authRoutes.js';
 import passport from 'passport';
 
-app.use(passport.initialize());
-require('./services/googleStrategy.jsx');
-
 dotenv.config();
 const app = express();
+app.use(passport.initialize());
+require('./services/googleStrategy.jsx');
 app.use(cookieParser());
 app.use(helmet());
 
