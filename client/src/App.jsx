@@ -8,6 +8,9 @@ import LogOut from './pages/LogOut';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import EmployeesList from './pages/EmployeesList';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import DataDeletionInstruction from './pages/DataDeletionInstruction';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +21,12 @@ const App = () => {
         <Toaster position="top-right" />
         <Routes>
           <Route path="/" element={<ContactUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route
+            path="/data-deletion-instruction"
+            element={<DataDeletionInstruction />}
+          />
           <Route
             path="/login"
             element={
