@@ -11,6 +11,18 @@
     {
       "src": "/admin/dashboard",
       "dest": "/"
+    },
+    {
+      "src": "/privacy-policy",
+      "dest": "/"
+    },
+    {
+      "src": "/terms-of-service",
+      "dest": "/"
+    },
+    {
+      "src": "/data-deletion-instruction",
+      "dest": "/"
     }
   ]
 }
