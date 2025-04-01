@@ -10,21 +10,20 @@ googleAuthRoute.get(
   })
 );
 
-const clientUrl =
-  process.env.NODE_ENV === 'production'
-    ? process.env.CLIENT_URL_PROD
-    : process.env.CLIENT_URL_DEV;
+const isProduction = process.env.NODE_ENV === 'production';
+const CLIENT_URL = isProduction
+  ? process.env.CLIENT_URL_PROD
+  : process.env.CLIENT_URL_DEV;
 
 googleAuthRoute.get(
-  '/api/auth/google',
+  '/api/auth/google/callback',
   passport.authenticate('google', {
-    failureRedirect: '/',
-    session: false
+    failureRedirect: '/'
   }),
   (req, res) => {
     const token = req.user.generateJWT();
     res.cookie('x-auth-cookie', token);
-    res.redirect(clientUrl);
+    res.redirect(CLIENT_URL);
   }
 );
 

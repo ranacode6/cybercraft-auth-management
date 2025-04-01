@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema(
   {
@@ -10,7 +11,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       lowercase: true,
       unique: true,
-      required: [true, "can't be blank"],
+      // required: [true, "can't be blank"],
       match: [/^[a-zA-Z0-9_]+$/, 'is invalid'],
       index: true
     },
@@ -18,7 +19,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       lowercase: true,
       unique: true,
-      required: [true, "can't be blank"],
+      // required: [true, "can't be blank"],
       match: [/\S+@\S+\.\S+/, 'is invalid'],
       index: true
     },
@@ -30,7 +31,7 @@ const userSchema = new mongoose.Schema(
     },
     fullName: String,
     avatar: String,
-    role: { type: String, enum: ['admin', 'user'], default: 'USER' },
+    role: { type: String, enum: ['admin', 'user'], default: 'user' },
     bio: String,
     // google
     googleId: {
@@ -47,6 +48,19 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.methods.generateJWT = function () {
+  const token = jwt.sign(
+    {
+      expiresIn: '12h',
+      id: this._id,
+      provider: this.provider,
+      email: this.email
+    },
+    process.env.JWT_SECRET
+  );
+  return token;
+};
 
 const User = mongoose.model('User', userSchema);
 

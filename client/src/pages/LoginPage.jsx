@@ -21,8 +21,8 @@ const LoginPage = () => {
 
   const isProduction = import.meta.env.NODE_ENV === 'production';
 
-  const clientUrl = isProduction
-    ? import.meta.env.VITE_CLIENT_URL_PROD
+  const serverUrl = isProduction
+    ? import.meta.env.VITE_SERVER_URL_PROD
     : import.meta.env.VITE_SERVER_URL_DEV;
 
   const togglePasswordVisibility = () => {
@@ -166,21 +166,20 @@ const LoginPage = () => {
 
           <div className="flex flex-col gap-3 my-3 w-3/4">
             <Link
-              to={`${clientUrl}/auth/google`}
+              to={`${serverUrl}/api/auth/google`}
               className="w-full flex items-center justify-center gap-3 bg-[rgb(109,22,38)] hover:bg-[#651421] text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
-              onClick={() => console.log('Google login')}
             >
-              <img src="../../public/google.svg" className="w-5 h-5" />
+              <img src="/google.svg" className="w-5 h-5" />
               <span>Login with Google</span>
             </Link>
 
-            <button
+            <Link
+              to={`${serverUrl}/api/auth/facebook`}
               className="w-full flex items-center justify-center gap-3 bg-[#1877F2] hover:bg-[#1864D6] text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
-              onClick={() => console.log('Facebook login')}
             >
-              <img src="../../public/facebook.svg" className="w-5 h-5" />
+              <img src="/facebook.svg" className="w-5 h-5" />
               <span>Login with Facebook</span>
-            </button>
+            </Link>
           </div>
 
           {/* Sign up link */}

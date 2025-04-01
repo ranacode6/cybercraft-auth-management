@@ -10,10 +10,13 @@ import contactRoute from './routes/contactRoutes.js';
 import authRoute from './routes/authRoutes.js';
 import passport from 'passport';
 import './services/googleStrategy.js';
+import './services/facebookStrategy.js';
+import googleAuthRoute from './routes/googleAuthRoutes.js';
+import session from 'express-session';
+import facebookAuthRoute from './routes/facebookAuthRoutes.js';
 
 dotenv.config();
 const app = express();
-app.use(passport.initialize());
 app.use(cookieParser());
 app.use(helmet());
 
@@ -28,6 +31,16 @@ const corsOptions = {
   allowedHeaders: 'Content-Type,Authorization'
 };
 app.use(cors(corsOptions));
+app.use(
+  session({
+    secret: 'your_secret_key', // Change this to a strong secret
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set to true if using HTTPS
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(compression());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -42,6 +55,8 @@ connectDB();
 // Routes
 app.use('/api/contacts', contactRoute);
 app.use('/api/auth', authRoute);
+app.use('', googleAuthRoute);
+app.use('', facebookAuthRoute);
 
 const PORT = process.env.PORT || 5000;
 
