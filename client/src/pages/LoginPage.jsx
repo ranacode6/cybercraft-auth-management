@@ -19,7 +19,7 @@ import {
 const LoginPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const isProduction = import.meta.env.NODE_ENV === 'production';
+  const isProduction = import.meta.env.VITE_NODE_ENV === 'production';
 
   const serverUrl = isProduction
     ? import.meta.env.VITE_SERVER_URL_PROD
